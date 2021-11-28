@@ -1,10 +1,10 @@
 import React from "react";
+import Todos from "./components/Todos";
 
 const App = function () {
   return (
-    <div>
-      <h1>Hello Neco World!!</h1>
-      <p>(=^.^=)</p>
+    <div className="App">
+      <Todos />
     </div>
   );
 };
