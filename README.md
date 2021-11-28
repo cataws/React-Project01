@@ -17,6 +17,8 @@ VSCode の setting.json も含めて、VSCode でファイルを保存する際�
 
 ## 3. yarn start
 
-ブラウザに Hello workd を表示
+ブラウザに ToDo アプリが表示される
+現時点では、追加・削除・完了ができる
+タスクの保存はまだできないよ
 
 ## 4. Ctrl + C で終了
