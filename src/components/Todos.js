@@ -14,11 +14,11 @@ const Todos = function () {
     setInputTask(evt.target.value);
   };
 
-  const handleStopTaskSubmit = (evt) => {
+  const handleStopSubmitTask = (evt) => {
     evt.preventDefault();
   };
 
-  const handleTaskSubmit = (evt) => {
+  const handleSubmitTask = (evt) => {
     evt.preventDefault();
     if (inputTask === "") {
       // タスク未入力は認めない
@@ -26,11 +26,18 @@ const Todos = function () {
       return;
     }
 
+    const found = todos.find((todo) => todo.item === inputTask);
+    if (found) {
+      // タスクの重複は認めない
+      window.alert("タスクが重複しています");
+      return;
+    }
+
     setTodo((todo) => [...todo, { item: inputTask, isCompleted: false }]);
     setInputTask("");
   };
 
-  const handleTaskComplete = (completeTask) => {
+  const handleCompleteTask = (completeTask) => {
     const completedTodos = [...todos].map((todo) => {
       if (todo.item === completeTask.item) {
         todo.isCompleted = !todo.isCompleted;
@@ -40,7 +47,7 @@ const Todos = function () {
     setTodo(completedTodos);
   };
 
-  const handleTaskDelete = (deleteTask) => {
+  const handleDeleteTask = (deleteTask) => {
     const deletedTodos = [...todos].filter((todo) => todo.item !== deleteTask);
     setTodo(deletedTodos);
   };
@@ -50,14 +57,14 @@ const Todos = function () {
       <h1>ToDo List</h1>
       <div className="flex">
         <img src={NecoIcon} alt="ネコアイコン" title="ネコ" width="10%" />
-        <form id="task_form" onSubmit={handleStopTaskSubmit}>
+        <form id="task_form" onSubmit={handleStopSubmitTask}>
           <input
             id="task_input"
             type="text"
             value={inputTask}
             onChange={handleInputTask}
           />
-          <button id="task_submit" type="button" onClick={handleTaskSubmit}>
+          <button id="task_submit" type="button" onClick={handleSubmitTask}>
             やること追加
           </button>
           <button id="task_delete" type="button">
@@ -82,14 +89,14 @@ const Todos = function () {
               <button
                 type="button"
                 className="task_button"
-                onClick={() => handleTaskDelete(todo.item)}
+                onClick={() => handleDeleteTask(todo.item)}
               >
                 Delete
               </button>
               <button
                 type="button"
                 className="task_button"
-                onClick={() => handleTaskComplete(todo)}
+                onClick={() => handleCompleteTask(todo)}
               >
                 {todo.isCompleted === false ? "Complete" : "Restore"}
               </button>
