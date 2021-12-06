@@ -10,10 +10,10 @@ const TodoProvider = function (props) {
     { item: "ccc", isCompleted: false },
   ]);
 
-  const memoValue = useMemo(() => ({ todos, setTodo }), []);
+  const memoedTodo = useMemo(() => ({ todos, setTodo }), [todos]);
 
   return (
-    <TodoContext.Provider value={memoValue}>{children}</TodoContext.Provider>
+    <TodoContext.Provider value={memoedTodo}>{children}</TodoContext.Provider>
   );
 };
 
