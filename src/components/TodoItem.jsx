@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { TodoContext } from "./provider/TodoProvider";
 
 const TodoItem = function () {
   const { todos, setTodo } = useContext(TodoContext);
+  useEffect(() => console.log({ todos }));
   const handleCompleteTask = (completeTask) => {
     const completedTodos = [...todos].map((todo) => {
       if (todo.item === completeTask.item) {
