@@ -1,16 +1,21 @@
 import { useState, useContext } from "react";
 import { TodoContext } from "./provider/TodoProvider";
+import { setPersistentTodos, resetPersistentTodos } from "./LocalStorage";
 import NecoIcon from "../pics/neco_icon.png";
 
 const TodoInput = function () {
   const { todos, setTodo } = useContext(TodoContext);
   const [inputTask, setInputTask] = useState("");
+
   const handleInputTask = (evt) => {
     setInputTask(evt.target.value);
   };
+
   const handleStopSubmitTask = (evt) => {
     evt.preventDefault();
   };
+
+  // やること追加ボタン押下時① ⇒ エラー処理
   const handleSubmitTask = (evt) => {
     evt.preventDefault();
     if (inputTask === "") {
@@ -26,13 +31,18 @@ const TodoInput = function () {
       return;
     }
 
+    // やること追加ボタン押下時② ⇒ タスクの要素を追加
     const addedNewTodos = [...todos, { item: inputTask, isCompleted: false }];
     setTodo(addedNewTodos);
+    setPersistentTodos(addedNewTodos);
     setInputTask("");
   };
+
+  // 全削除ボタン押下時
   const handleDeleteAllTask = (evt) => {
     evt.preventDefault();
     setTodo([]);
+    resetPersistentTodos();
   };
 
   return (

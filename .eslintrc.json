@@ -24,6 +24,7 @@
   ],
   "rules": {
     "no-param-reassign": 0,
+    "no-unused-vars": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-no-constructed-context-values": "off",

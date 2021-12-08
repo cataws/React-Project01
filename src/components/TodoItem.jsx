@@ -1,8 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { TodoContext } from "./provider/TodoProvider";
+import { setPersistentTodos } from "./LocalStorage";
 
 const TodoItem = function () {
   const { todos, setTodo } = useContext(TodoContext);
+
+  // Completeボタン押下時の処理(完了⇔未完了のトグル)
   const handleCompleteTask = (completeTask) => {
     const completedTodos = [...todos].map((todo) => {
       if (todo.item === completeTask.item) {
@@ -11,10 +14,14 @@ const TodoItem = function () {
       return todo;
     });
     setTodo(completedTodos);
+    setPersistentTodos(completedTodos);
   };
+
+  // Deleteボタン押下時の処理
   const handleDeleteTask = (deleteTask) => {
     const deletedTodos = [...todos].filter((todo) => todo.item !== deleteTask);
     setTodo(deletedTodos);
+    setPersistentTodos(deletedTodos);
   };
 
   return (

@@ -1,10 +1,13 @@
 import React from "react";
 import Todos from "./components/Todos";
+import TodoProvider from "./components/provider/TodoProvider";
 
 const App = function () {
   return (
     <div className="App">
-      <Todos />
+      <TodoProvider>
+        <Todos />
+      </TodoProvider>
     </div>
   );
 };
