@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TodoContext } from "./provider/TodoProvider";
-import { setPersistentTodos } from "./LocalStorage";
+import { setPersistentTodos } from "../utils/index";
+import Button from "./Button";
 
 const TodoItem = function () {
   const { todos, setTodo } = useContext(TodoContext);
@@ -31,26 +32,24 @@ const TodoItem = function () {
           id={todo.item}
           key={todo.item}
           style={
-            todo.isCompleted === true
+            todo.isCompleted
               ? { textDecorationLine: "line-through", color: "#c0c0c0" }
               : {}
           }
         >
           {todo.item}
-          <button
+          <Button
             className="task_button"
-            type="button"
             onClick={() => handleDeleteTask(todo.item)}
           >
             Delete
-          </button>
-          <button
+          </Button>
+          <Button
             className="task_button"
-            type="button"
             onClick={() => handleCompleteTask(todo)}
           >
-            {todo.isCompleted === false ? "Complete" : "Restore"}
-          </button>
+            {!todo.isCompleted ? "Complete" : "Restore"}
+          </Button>
         </li>
       ))}
     </ul>

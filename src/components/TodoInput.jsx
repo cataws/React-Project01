@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { TodoContext } from "./provider/TodoProvider";
-import { setPersistentTodos, resetPersistentTodos } from "./LocalStorage";
+import { setPersistentTodos, resetPersistentTodos } from "../utils/index";
 import NecoIcon from "../pics/neco_icon.png";
 
 const TodoInput = function () {

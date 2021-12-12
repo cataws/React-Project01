@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { TodoContext } from "./provider/TodoProvider";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import { getPersistentTodos } from "./LocalStorage";
+import { getPersistentTodos } from "../utils/index";
 
 const Todos = function () {
   const { todos, setTodo } = useContext(TodoContext);

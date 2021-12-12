@@ -11,5 +11,6 @@ export const setPersistentTodos = (todo) => {
 
 // 全削除ボタン押下時 ⇒ LoaclStorageを削除)
 export const resetPersistentTodos = () => {
-  localStorage.clear();
+  //  localStorage.clear();
+  localStorage.removeItem("todo");
 };
