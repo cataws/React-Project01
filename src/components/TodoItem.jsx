@@ -1,29 +1,11 @@
 import { useContext } from "react";
 import { TodoContext } from "./provider/TodoProvider";
-import { setPersistentTodos } from "../utils/index";
+import useCustomTodo from "../hooks/useCustomTodo";
 import Button from "./Button";
 
 const TodoItem = function () {
   const { todos, setTodo } = useContext(TodoContext);
-
-  // Completeボタン押下時の処理(完了⇔未完了のトグル)
-  const handleCompleteTask = (completeTask) => {
-    const completedTodos = [...todos].map((todo) => {
-      if (todo.item === completeTask.item) {
-        todo.isCompleted = !todo.isCompleted;
-      }
-      return todo;
-    });
-    setTodo(completedTodos);
-    setPersistentTodos(completedTodos);
-  };
-
-  // Deleteボタン押下時の処理
-  const handleDeleteTask = (deleteTask) => {
-    const deletedTodos = [...todos].filter((todo) => todo.item !== deleteTask);
-    setTodo(deletedTodos);
-    setPersistentTodos(deletedTodos);
-  };
+  const { handleCompleteTask, handleDeleteTask } = useCustomTodo();
 
   return (
     <ul id="task_list">
