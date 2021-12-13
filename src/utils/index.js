@@ -9,7 +9,7 @@ export const setPersistentTodos = (todo) => {
   localStorage.setItem("todo", JSON.stringify(todo));
 };
 
-// 全削除ボタン押下時 ⇒ LoaclStorageを削除)
+// 全削除ボタン押下時 ⇒ LocalStorageを削除)
 export const resetPersistentTodos = () => {
   //  localStorage.clear();
   localStorage.removeItem("todo");

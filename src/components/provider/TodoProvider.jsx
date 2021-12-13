@@ -1,13 +1,26 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
+import { getPersistentTodos, setPersistentTodos } from "../../utils/index";
 
-export const TodoContext = createContext({});
+export const TodoContext = createContext({
+  todos: getPersistentTodos(),
+  setTodo: (token) => {},
+});
 
 const TodoProvider = function (props) {
   const { children } = props;
-  const [todos, setTodo] = useState([]);
+  const todoContext = useContext(TodoContext);
+  const [todos, setTodo] = useState([todoContext.todos]);
+
+  const newTodoContext = {
+    todos,
+    setTodo: (todo) => {
+      setPersistentTodos(todo);
+      setTodo(todo);
+    },
+  };
 
   return (
-    <TodoContext.Provider value={{ todos, setTodo }}>
+    <TodoContext.Provider value={newTodoContext}>
       {children}
     </TodoContext.Provider>
   );

@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { TodoContext } from "./provider/TodoProvider";
-import { setPersistentTodos, resetPersistentTodos } from "../utils/index";
 import NecoIcon from "../pics/neco_icon.png";
 
 const TodoInput = function () {
@@ -34,7 +33,6 @@ const TodoInput = function () {
     // やること追加ボタン押下時② ⇒ タスクの要素を追加
     const addedNewTodos = [...todos, { item: inputTask, isCompleted: false }];
     setTodo(addedNewTodos);
-    setPersistentTodos(addedNewTodos);
     setInputTask("");
   };
 
@@ -42,7 +40,6 @@ const TodoInput = function () {
   const handleDeleteAllTask = (evt) => {
     evt.preventDefault();
     setTodo([]);
-    resetPersistentTodos();
   };
 
   return (
